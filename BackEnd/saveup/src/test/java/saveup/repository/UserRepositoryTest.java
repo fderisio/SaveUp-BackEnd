@@ -1,6 +1,9 @@
 package saveup.repository;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import saveup.AbstractSaveUpIntegrationTests;
 import saveup.domain.EntityTestUtils;
+import saveup.domain.User;
 
 public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 
@@ -37,9 +41,24 @@ public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
+	@Test
+	public void findAll() {
+		List<String> firstNames = repository.findAll().stream().map(User::getFirstName).collect(toList());
+		assertThat(firstNames).containsExactlyInAnyOrder("Eva", "Jack");
+	}
+
+	@Test
+	public void deleteById() {
+		assertNumUsers(NUM_TEST_USERS);
+		User user = repository.findById(1L).get();
+		repository.delete(user.getId());
+		repository.flush();
+		assertNumUsers(NUM_TEST_USERS - 1);
+	}
+
+
 	/* method for test purposes */
 	private void assertNumUsers(int expected) {
 		assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "user")).isEqualTo(expected);
 	}
-
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,7 +23,8 @@ public class Expense {
 	private Long id;
 	
 	@ManyToOne(optional = false)
-	private UserExpenseCategory userExpenseCategory;
+	@JoinColumn(name = "category_id")
+	private Category userExpenseCategory;
 	
 	@Column(nullable = false, length = 20)
 	private String description;
@@ -37,15 +39,16 @@ public class Expense {
 	private Double total;
 	
 	@ManyToOne(optional = false)
-	private UserPayMethod userPayMethod;
+	@JoinColumn(name = "payment_method_id")
+	private PayMethod userPayMethod;
 	
 	public Expense() {
 		/* required by JPA */
 	}
 	
 	/* constructor without store */
-	public Expense(UserExpenseCategory userExpenseCategory, String description,
-		String expDate,Double total, UserPayMethod userPayMethod) {
+	public Expense(Category userExpenseCategory, String description,
+		String expDate,Double total, PayMethod userPayMethod) {
 		this.userExpenseCategory = userExpenseCategory;
 		this.description = description;
 		this.expDate = expDate;
@@ -54,8 +57,8 @@ public class Expense {
 	}
 	
 	/* full constructor */
-	public Expense(UserExpenseCategory userExpenseCategory, String description,
-			String store, String expDate,Double total, UserPayMethod userPayMethod) {
+	public Expense(Category userExpenseCategory, String description,
+			String store, String expDate,Double total, PayMethod userPayMethod) {
 		this.userExpenseCategory = userExpenseCategory;
 		this.description = description;
 		this.store = store;

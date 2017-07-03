@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import saveup.domain.UserIncome;
+import saveup.domain.Expense;
 
-public interface ExpenseRepository extends JpaRepository<UserIncome, Long>{
+public interface ExpenseRepository extends JpaRepository<Expense, Long>{
 	
-	Optional<UserIncome> findByid(Long id);
+	Optional<Expense> findById(Long id);
 	
 }

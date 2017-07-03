@@ -42,17 +42,17 @@ public class User {
 	@Column(name = "last_login", updatable = false, nullable = true)
 	private Date lastLogIn;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id")
-	private List<UserExpenseCategory> expCategories = new ArrayList<>();
+	private List<Category> categories = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id")
-	private List<UserIncome> incomes = new ArrayList<>();
+	private List<Income> incomes = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("id")
-	private List<UserPayMethod> paymethods = new ArrayList<>();
+	private List<PayMethod> paymethods = new ArrayList<>();
 	
 	public User() {
 		/* required by JPA */
@@ -78,4 +78,20 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
+	public void addCategory(Category category) {
+		getCategories().add(category);
+		category.setUser(this);
+	}
+	
+	public void addPayMethod(PayMethod paymethod) {
+		getPaymethods().add(paymethod);
+		paymethod.setUser(this);
+	}
+	
+	public void addIncome(Income income) {
+		getIncomes().add(income);
+		income.setUser(this);
+	}
+	
 }
