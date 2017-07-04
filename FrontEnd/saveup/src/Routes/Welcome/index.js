@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../style.css';
 import handImage from '../../images/hand.png';
-import Navbar from '../Navbar';
+import Navbar from '../../Containers/Navbar';
 import Footer from '../../Components/Footer';
 
 class Welcome extends Component {

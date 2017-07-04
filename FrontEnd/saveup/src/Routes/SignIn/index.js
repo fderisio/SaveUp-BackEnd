@@ -5,7 +5,7 @@ import '../../style.css';
 import { RaisedButton } from 'material-ui';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import Navbar from '../Navbar';
+import Navbar from '../../Containers/Navbar';
 import Footer from '../../Components/Footer';
 
 const styles = {

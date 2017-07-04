@@ -2,7 +2,7 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import Navbar from '../Navbar';
+import Navbar from '../../Containers/Navbar';
 import Footer from '../../Components/Footer';
 
 const styles = {
@@ -11,7 +11,7 @@ const styles = {
   },
   paper: {
     width:'30%', 
-    height: 450, 
+    height: 480, 
     margin: 'auto', 
     marginTop: 20,
   },
@@ -58,6 +58,7 @@ class SignUp extends React.Component {
             <TextField 
               hintText="Password" floatingLabelText="Password" 
               type="password" style={styles.textField} onChange={this.handlePassword} />
+            <p className="SmallNotes">*Minimum 6 charachters</p><br/>
             <TextField 
               hintText="Repeat password" floatingLabelText="Repeat Password" 
               type="password" style={styles.textField} onChange={this.handleRepeatPassword} />

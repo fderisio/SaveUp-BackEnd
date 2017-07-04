@@ -1,6 +1,6 @@
 import React from 'react';
 import gif from './underconstruction.gif';
-import Navbar from '../Navbar';
+import Navbar from '../../Containers/Navbar';
 import Footer from '../../Components/Footer';
 
 const UnderConstruction = () => (
