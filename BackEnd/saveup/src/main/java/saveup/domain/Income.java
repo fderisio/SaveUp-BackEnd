@@ -27,7 +27,7 @@ public class Income {
 	private User user;
 	
 	@Column(nullable = false, length = 6)
-	private Integer income;
+	private Integer amount;
 	
 	@Column(name = "started_at", nullable = false)
 	private String startedAt;
@@ -39,9 +39,9 @@ public class Income {
 		/* required by JPA */
 	}
 	
-	public Income(User user, Integer income, String startedAt, boolean monthly) {
+	public Income(User user, Integer amount, String startedAt, boolean monthly) {
 		this.user = user;
-		this.income = income;
+		this.amount = amount;
 		this.startedAt = startedAt;
 		this.monthly = monthly;
 	}

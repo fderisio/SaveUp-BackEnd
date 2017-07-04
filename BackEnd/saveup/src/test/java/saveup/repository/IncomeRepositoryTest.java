@@ -1,6 +1,9 @@
 package saveup.repository;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +12,12 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import saveup.AbstractSaveUpIntegrationTests;
 import saveup.domain.EntityTestUtils;
-import saveup.domain.User;
 import saveup.domain.Income;
+import saveup.domain.User;
 
 public class IncomeRepositoryTest extends AbstractSaveUpIntegrationTests {
 
-	private static final int NUM_TEST_INCOMES = 2;
+	private static final int NUM_TEST_INCOMES = 3;
 	
 	@Autowired
 	IncomeRepository incomeRepository;
@@ -43,6 +46,14 @@ public class IncomeRepositoryTest extends AbstractSaveUpIntegrationTests {
 	public void findById() {
 		assertThat(incomeRepository.findById(1L).get().getUser().getFirstName()).isEqualTo("Eva");
 		//assertThat(repository.findById(999999L)).isNotPresent();
+	}
+	
+	@Test
+	public void findByUserId() {
+		List<Integer> incomes = incomeRepository.findByUserId(1L).stream().map(Income::getAmount).collect(toList());
+		assertThat(incomes).containsExactlyInAnyOrder(8000, 9000);
+		List<Integer> incomes2 = incomeRepository.findByUserId(2L).stream().map(Income::getAmount).collect(toList());
+		assertThat(incomes2).containsExactlyInAnyOrder(5000);
 	}
 	
 	/* method for test purposes */

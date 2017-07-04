@@ -8,11 +8,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import saveup.AbstractSaveUpIntegrationTests;
+import saveup.domain.Category;
 import saveup.domain.EntityTestUtils;
 import saveup.domain.Expense;
-import saveup.domain.User;
-import saveup.domain.Category;
 import saveup.domain.PayMethod;
+import saveup.domain.User;
 
 public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 

@@ -6,7 +6,7 @@ import saveup.domain.Expense;
 
 public interface ExpenseService {
 
-	Expense saveExpenseForCategory(Expense expense, Long id);
+	Expense registerNewExpense(Expense expense);
 
 	Expense findById(Long id);
 
@@ -14,6 +14,6 @@ public interface ExpenseService {
 
 	List<Expense> findAllByCategoryId(Long id);
 
-	List<Expense> findAllContainingText(String searchText);
+	List<Expense> findByTextContaining(String searchText);
 	
 }

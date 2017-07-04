@@ -1,6 +1,9 @@
 package saveup.repository;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,8 @@ import org.springframework.test.jdbc.JdbcTestUtils;
 
 import saveup.AbstractSaveUpIntegrationTests;
 import saveup.domain.EntityTestUtils;
-import saveup.domain.User;
 import saveup.domain.PayMethod;
+import saveup.domain.User;
 
 public class PayMethodRepositoryTest extends AbstractSaveUpIntegrationTests {
 
@@ -43,6 +46,23 @@ public class PayMethodRepositoryTest extends AbstractSaveUpIntegrationTests {
 	public void findById() {
 		assertThat(payMethodsRepository.findById(1L).get().getName()).isEqualTo("MasterCard");
 		//assertThat(repository.findById(999999L)).isNotPresent();
+	}
+	
+	@Test
+	public void findByUserId() {
+		List<String> categories = payMethodsRepository.findByUserId(1L).stream().map(PayMethod::getName).collect(toList());
+		assertThat(categories).containsExactlyInAnyOrder("MasterCard", "American Express");
+		List<Long> ids = payMethodsRepository.findByUserId(1L).stream().map(PayMethod::getId).collect(toList());
+		assertThat(ids).containsExactlyInAnyOrder(1L, 4L);
+	}
+	
+	@Test // FAIL!!! NOT WORKING!!!!
+	public void deleteById() {
+		assertNumUsers(NUM_TEST_PAYMENT_METHODS);
+		PayMethod paymethod = payMethodsRepository.findById(1L).get();
+		payMethodsRepository.delete(paymethod.getId());
+		payMethodsRepository.flush();
+		assertNumUsers(NUM_TEST_PAYMENT_METHODS - 1);
 	}
 	
 	/* method for test purposes */

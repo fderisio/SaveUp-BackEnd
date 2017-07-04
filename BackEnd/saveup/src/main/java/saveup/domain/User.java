@@ -54,6 +54,12 @@ public class User {
 	@OrderBy("id")
 	private List<PayMethod> paymethods = new ArrayList<>();
 	
+//	// NEW
+//	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@OrderBy("exp_date")
+//	private List<Expense> expenses = new ArrayList<>();
+//	//
+	
 	public User() {
 		/* required by JPA */
 	}
@@ -93,5 +99,13 @@ public class User {
 		getIncomes().add(income);
 		income.setUser(this);
 	}
+	
+//	// NEW
+//	public void addExpense(Category category, Expense expense) {
+//		getExpenses().add(expense);
+//		category.setUser(this);
+//		expense.setUserExpenseCategory(category);
+//		
+//	}
 	
 }

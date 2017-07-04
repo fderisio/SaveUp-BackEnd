@@ -27,7 +27,7 @@ public class Expense {
 	private Category userExpenseCategory;
 	
 	@Column(nullable = false, length = 20)
-	private String description;
+	private String text;
 	
 	@Column(nullable = true, length = 30)
 	private String store;
@@ -47,20 +47,20 @@ public class Expense {
 	}
 	
 	/* constructor without store */
-	public Expense(Category userExpenseCategory, String description,
+	public Expense(Category userExpenseCategory, String text,
 		String expDate,Double total, PayMethod userPayMethod) {
 		this.userExpenseCategory = userExpenseCategory;
-		this.description = description;
+		this.text = text;
 		this.expDate = expDate;
 		this.total = total;
 		this.userPayMethod = userPayMethod;
 	}
 	
 	/* full constructor */
-	public Expense(Category userExpenseCategory, String description,
+	public Expense(Category userExpenseCategory, String text,
 			String store, String expDate,Double total, PayMethod userPayMethod) {
 		this.userExpenseCategory = userExpenseCategory;
-		this.description = description;
+		this.text = text;
 		this.store = store;
 		this.expDate = expDate;
 		this.total = total;

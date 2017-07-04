@@ -6,14 +6,12 @@ import saveup.domain.Category;
 
 public interface CategoryService {
 
-	Category saveCategoryForUser(Category category, String username);
+	Category saveCategoryForUser(Category category, Long id);
 
 	Category findById(Long id);
 
 	List<Category> findAll();
 
-	List<Category> findAllByUsername(String username);
+	List<Category> findAllByUserId(Long id);
 
-	List<Category> findAllContainingText(String searchText);
-	
 }
