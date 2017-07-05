@@ -4,6 +4,7 @@ import Welcome from './Routes/Welcome';
 import Dashboard from './Routes/Dashboard';
 import Profile from './Routes/Profile';
 import Expenses from './Routes/Expenses';
+import AddExpense from './Routes/AddExpense';
 import SignUp from './Routes/SignUp';
 import SignIn from './Routes/SignIn';
 import UnderConstruction from './Routes/UnderConstruction';
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/expenses" component={Expenses} />
+            <Route exact path="/addexpense" component={AddExpense} />
             <Route exact path="/underconstruction" component={UnderConstruction} />
 		    </Switch>
       </Router>
