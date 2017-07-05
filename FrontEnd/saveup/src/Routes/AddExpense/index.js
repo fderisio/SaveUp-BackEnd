@@ -21,9 +21,10 @@ class AddExpense extends Component {
     this.state = {
       category: 'Groceries',
       notes: '',
-      user: '',
-      password: '',
-      passwordRepeat: '',
+      company: '',
+      expenseDate: '',
+      total: '',
+      payment: '',
     }
   }
 
@@ -32,6 +33,7 @@ class AddExpense extends Component {
   handleCompany = (e) => { this.setState({ company: e.currentTarget.value }); };
   handleDate = (e) => { this.setState({ expenseDate: e.currentTarget.value }); };
   handleTotal = (e) => { this.setState({ total: e.currentTarget.value }); };
+  handlePayment = (e) => { this.setState({ payment: e.currentTarget.value }); };
 
   addExpense = (e) => {
     e.preventDefault();
