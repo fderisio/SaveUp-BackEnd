@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.Data;
@@ -44,10 +47,11 @@ public class PayMethod implements Serializable{
 	private String name;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(nullable = true)
+	@Column(nullable = true, length = 40)
 	private String bank;
 	
 	@OneToMany(mappedBy = "payMethod", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE) // deletes payment methods even with expenses attached
 	@OrderBy("expense_date")
 	private List<Expense> expenses = new ArrayList<>();
 	

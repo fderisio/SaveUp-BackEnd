@@ -59,7 +59,7 @@ public class CategoryRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void deleteById() { // Works only for an unused category
 		assertNumUsers(NUM_TEST_CATEGORIES);
-		Category category = categoryRepository.findById(2L).get();
+		Category category = categoryRepository.findById(3L).get();
 		categoryRepository.delete(category.getId());
 		categoryRepository.flush();
 		assertNumUsers(NUM_TEST_CATEGORIES - 1);

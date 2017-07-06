@@ -15,5 +15,7 @@ public interface ExpenseService {
 	Expense update(Expense expense);
 	
 	void deleteById(Long id);
+
+	List<Expense> findAllByCategoryId(Long categoryId);
 	
 }

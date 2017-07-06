@@ -1,6 +1,9 @@
 package saveup.repository;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +68,12 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 	public void findById() {
 		assertThat(expenseRepository.findById(1L).get().getCategory().getName()).isEqualTo("Leisure");
 		//assertThat(repository.findById(999999L)).isNotPresent();
+	}
+	
+	@Test
+	public void findAllByCategoryId() {
+		List<String> expensesTotals = expenseRepository.findAllByCategoryId(1L).stream().map(Expense::getText).collect(toList());
+		assertThat(expensesTotals).containsExactlyInAnyOrder("Dinner", "Cinema");
 	}
 	
 	@Test

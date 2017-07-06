@@ -29,8 +29,7 @@ public class UserServiceTests extends AbstractSaveUpIntegrationTests {
 
 	@Test
 	public void deleteById() { 
-		// works only if the user does not have categories, pay methods or incomes attached
-		User user = userService.findById(3L);
+		User user = userService.findById(1L);
 		userService.deleteById(user.getId());
 		assertThat(userService.findAll()).hasSize(NUM_TEST_USERS - 1);
 	}

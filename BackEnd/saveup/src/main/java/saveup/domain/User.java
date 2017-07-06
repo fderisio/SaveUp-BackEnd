@@ -1,7 +1,6 @@
 package saveup.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -45,21 +47,24 @@ public class User implements Serializable {
 	@Column(nullable = false, unique = true, length = 75)
 	private String email;
 	
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 75)
 	private String password;
 	
 	@Column(name = "last_login", updatable = false, nullable = true)
-	private Date lastLogIn;
+	private String lastLogIn;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE) // deletes users even with categories attached
 	@OrderBy("name")
 	private List<Category> categories = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OrderBy("id")
 	private List<Income> incomes = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OrderBy("name")
 	private List<PayMethod> paymethods = new ArrayList<>();
 	

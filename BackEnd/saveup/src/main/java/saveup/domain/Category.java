@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.Data;
@@ -48,6 +51,7 @@ public class Category implements Serializable{
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("expense_date")
+	@OnDelete(action = OnDeleteAction.CASCADE) // deletes category even with expenses attached
 	private List<Expense> expenses = new ArrayList<>();
 	
 	public Category() {

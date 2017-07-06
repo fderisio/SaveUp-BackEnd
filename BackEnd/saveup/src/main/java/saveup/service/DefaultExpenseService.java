@@ -70,10 +70,18 @@ public class DefaultExpenseService implements ExpenseService{
 		return this.expenseRepository.findAll();
 	}
 
+	@Override
+	public List<Expense> findAllByCategoryId(Long categoryId) {
+		logger.trace("Finding all expenses with category ID: {}", categoryId);
+		return this.expenseRepository.findAllByCategoryId(categoryId);
+	}
+	
 	@Transactional(readOnly = false)
 	@Override
 	public void deleteById(Long id) {
 		logger.trace("Deleting expense with ID [{}].", id);
 		expenseRepository.delete(id);
 	}
+
+	
 }

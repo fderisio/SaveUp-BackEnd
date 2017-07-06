@@ -34,7 +34,7 @@ public class Expense implements Serializable{
 	private Category category;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(nullable = false, length = 20)
+	@Column(nullable = false, length = 40)
 	private String text;
 	
 	@JsonView(JsonViews.Public.class)
@@ -42,7 +42,7 @@ public class Expense implements Serializable{
 	private String store;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(name = "expense_date", nullable = false)
+	@Column(name = "expense_date", nullable = false, length = 10)
 	private String expenseDate;
 	
 	@JsonView(JsonViews.Public.class)
@@ -59,7 +59,7 @@ public class Expense implements Serializable{
 	
 	/* constructor without store */
 	public Expense(Category category, String text,
-		String expenseDate,Double total, PayMethod payMethod) {
+			String expenseDate,Double total, PayMethod payMethod) {
 		this.category = category;
 		this.text = text;
 		this.expenseDate = expenseDate;

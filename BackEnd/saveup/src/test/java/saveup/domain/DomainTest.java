@@ -38,7 +38,7 @@ public class DomainTest {
 		User user = new User (1L, "Carol", "Jackson", "carol@aol.com", "hello123");
 		Category expCategory = new Category ("Leisure", user, false);
 		PayMethod payMethod = new PayMethod (user, "Visa", "HSBC");
-		Expense expense = new Expense (expCategory, "Cinema", "12.06.2017", 20.50, payMethod);
+		Expense expense = new Expense (expCategory, "Cinema", "2017-01-01", 20.50, payMethod);
 		assertThat(expense.getCategory().getUser().getId()).isEqualTo(1L);
 	}
 

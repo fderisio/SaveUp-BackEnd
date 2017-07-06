@@ -49,9 +49,8 @@ public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 
 	@Test
 	public void deleteById() { 
-		// fails when the user has categories, pay methods and/or incomes attached
 		assertNumUsers(NUM_TEST_USERS);
-		User user = repository.findById(3L).get();
+		User user = repository.findById(1L).get();
 		repository.delete(user.getId());
 		repository.flush();
 		assertNumUsers(NUM_TEST_USERS - 1);
