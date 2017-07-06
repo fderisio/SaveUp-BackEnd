@@ -32,7 +32,7 @@ public class RestExpenseController {
 	}
 	
 	@JsonView(JsonViews.Public.class)
-	@GetMapping("/{userId}")
+	@GetMapping("/{categoryId}")
 	public List<Expense> retrieveCategoriesByUserId(@PathVariable Long categoryId) {
 		return expenseService.findAllByCategoryId(categoryId);
 	}

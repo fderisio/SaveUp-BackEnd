@@ -11,7 +11,7 @@ public class IndexController implements ErrorController{
 
 	@RequestMapping(value = PATH)
 	public String error() {
-	    return "Sorry... There was an error in your request";
+	    return "Sorry... your request is invalid";
 	}
 
 	@Override

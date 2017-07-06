@@ -28,4 +28,6 @@ insert into expense(id, category_id, text, store, expense_date, total, payment_m
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
 (3L, 3L, 'Business Suit', 'H&M', '12.06.2017', 100, 3L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(4L, 3L, 'Sweater', 'C&A', '20.06.2017', 20, 4L);
+(4L, 3L, 'Sweater', 'C&A', '20.06.2017', 20, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(5L, 1L, 'Dinner', 'MigrosRestaurant', '01.06.2017', 46.50, 1L);

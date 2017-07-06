@@ -49,6 +49,7 @@ public class Expense implements Serializable{
 	@Column(nullable = false, length = 15)
 	private Double total;
 	
+	@JsonView(JsonViews.Public.class)
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "payment_method_id")
 	private PayMethod payMethod;

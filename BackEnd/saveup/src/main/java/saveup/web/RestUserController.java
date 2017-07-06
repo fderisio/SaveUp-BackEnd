@@ -29,7 +29,7 @@ import saveup.domain.PayMethod;
 import saveup.domain.User;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class RestUserController {
 
 	private final UserService userService;
@@ -48,9 +48,9 @@ public class RestUserController {
 	}
 	
 	@JsonView(JsonViews.Public.class)
-	@GetMapping
-	public List<User> retrieveAllUsers() {
-		return userService.findAll();
+	@GetMapping("/{userId}")
+	public User retrieveUserById(@PathVariable Long userId) {
+		return userService.findById(userId);
 	}
 	
 	@JsonView(JsonViews.Public.class)
@@ -72,12 +72,24 @@ public class RestUserController {
 	}
 	
 	@JsonView(JsonViews.NewUser.class)
-	@PostMapping
+	@PostMapping("/sigup")
 	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
 		User savedUser = userService.registerNewUser(postedUser);
 
 		UriComponents uriComponents = fromMethodCall(
 			on(getClass()).retrieveCategoriesByUserId(savedUser.getId())).build();
+
+		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+	}
+	
+
+	@JsonView(JsonViews.NewUser.class)
+	@PostMapping("/{userId}/categories/add")
+	public HttpEntity<Void> saveCategoryForUser(@RequestBody Category postedCategory, Long userId) {
+		Category savedCategory = categoryService.saveCategoryForUser(postedCategory, userId);
+
+		UriComponents uriComponents = fromMethodCall(
+			on(getClass()).retrieveCategoriesByUserId(savedCategory.getId())).build();
 
 		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 	}

@@ -53,11 +53,13 @@ public class User implements Serializable {
 	@Column(name = "last_login", updatable = false, nullable = true)
 	private String lastLogIn;
 	
+	@JsonView(JsonViews.Public.class)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE) // deletes users even with categories attached
 	@OrderBy("name")
 	private List<Category> categories = new ArrayList<>();
 	
+	@JsonView(JsonViews.Public.class)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OrderBy("id")

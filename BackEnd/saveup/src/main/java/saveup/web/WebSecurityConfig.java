@@ -28,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
-			.mvcMatcher("/users/**")
+			.mvcMatcher("/user/**")
 				.authorizeRequests()
-					.mvcMatchers(GET,  "/users/**").permitAll()
-					.mvcMatchers(POST, "/users").permitAll()
-					.mvcMatchers(      "/users/**").permitAll()
+					.mvcMatchers(GET,  "/user/**").permitAll()
+					.mvcMatchers(POST, "/user").permitAll()
+					.mvcMatchers(      "/user/**").permitAll()
 					.and()
 
 			.mvcMatcher("/categories/**")
