@@ -1,3 +1,4 @@
+
 package saveup.service;
 
 import java.util.List;
@@ -5,15 +6,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import saveup.domain.User;
 import saveup.repository.UserRepository;
-import saveup.service.EntityNotFoundException;
 
-public class DefaultUserService implements UserService, UserDetailsService {
+@Service
+public class DefaultUserService implements UserService {
 
 	private static final Logger logger = LoggerFactory.getLogger(DefaultUserService.class);
 
@@ -74,12 +75,12 @@ public class DefaultUserService implements UserService, UserDetailsService {
 		return userRepository.findAll();
 	}
 	
-//	// -- Spring Security: UserDetailsService ----------------------------------
+//// -- Spring Security: UserDetailsService ----------------------------------
 //
 //	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		logger.trace("Loading user by username [{}] for Spring Security.", username);
-//		return userRepository.findByUsernameWithRolesEagerlyLoaded(username).orElseThrow(
+//	public UserDetails loadUserByUsername(Long userId) throws UsernameNotFoundException {
+//		logger.trace("Loading user by user ID [{}] for Spring Security.", userId);
+//		return userRepository.findByUsernameWithRolesEagerlyLoaded(userId).orElseThrow(
 //			() -> new UsernameNotFoundException("Could not find user with username [" + username + "]"));
 //	}
 

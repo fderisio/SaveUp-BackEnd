@@ -5,34 +5,58 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import saveup.domain.Category;
 import saveup.domain.Expense;
+import saveup.domain.PayMethod;
 import saveup.repository.ExpenseRepository;
 
+@Service
 public class DefaultExpenseService implements ExpenseService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(DefaultCategoryService.class);
 
 	private final ExpenseRepository expenseRepository;
+	private final CategoryService categoryService;
+	private final PayMethodService paymethodService;
 	
 	@Autowired
-	public DefaultExpenseService(ExpenseRepository expenseRepository) {
+	public DefaultExpenseService(ExpenseRepository expenseRepository,
+			CategoryService categoryService, PayMethodService paymethodService) {
 		this.expenseRepository = expenseRepository;
+		this.categoryService = categoryService;
+		this.paymethodService = paymethodService;
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
-	public Expense registerNewExpense(Expense expense) {
+	public Expense registerNewExpense(Expense expense, Long categoryId, Long paymethodId) {
 		logger.trace("Saving expense [{}].", expense);
 
-		// Make sure we are saving a new expense and not accidentally
+		// add expense to category list
+		Category category = categoryService.findById(categoryId);
+		category.addExpense(expense);
+		
+		// add expense to payment method list
+		PayMethod paymethod = paymethodService.findById(paymethodId);
+		paymethod.addExpense(expense);
+		
+		// make sure we are saving a new expense and not accidentally
 		// updating an existing one.
 		expense.setId(null);
-
+		
 		return expenseRepository.save(expense);
 	}
 
+	@Transactional(readOnly = false)
+	@Override
+	public Expense update(Expense expense) {
+		logger.trace("Updating expense [{}].", expense);
+		return expenseRepository.save(expense);
+	}
+	
 	@Override
 	public Expense findById(Long id) {
 		logger.trace("Finding expense with ID: {}", id);
@@ -46,16 +70,10 @@ public class DefaultExpenseService implements ExpenseService{
 		return this.expenseRepository.findAll();
 	}
 
+	@Transactional(readOnly = false)
 	@Override
-	public List<Expense> findAllByCategoryId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteById(Long id) {
+		logger.trace("Deleting expense with ID [{}].", id);
+		expenseRepository.delete(id);
 	}
-
-	@Override
-	public List<Expense> findByTextContaining(String searchText) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

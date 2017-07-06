@@ -52,18 +52,28 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 		
 		// creates and saves an expense
 		Expense expense = EntityTestUtils.createExpense();
-		expense.setUserExpenseCategory(category);
-		expense.setUserPayMethod(payMethod);
+		category.addExpense(expense);
+		payMethod.addExpense(expense);
+		expense.setCategory(category);
+		expense.setPayMethod(payMethod);
 		expenseRepository.save(expense);
-		
+				
 		assertNumUsers(NUM_TEST_EXPENSES + 1);
-
 	}
 	
 	@Test
 	public void findById() {
-		assertThat(expenseRepository.findById(1L).get().getUserExpenseCategory().getName()).isEqualTo("Leisure");
+		assertThat(expenseRepository.findById(1L).get().getCategory().getName()).isEqualTo("Leisure");
 		//assertThat(repository.findById(999999L)).isNotPresent();
+	}
+	
+	@Test
+	public void deleteById() {
+		assertNumUsers(NUM_TEST_EXPENSES);
+		Expense expense = expenseRepository.findById(1L).get();
+		expenseRepository.delete(expense.getId());
+		expenseRepository.flush();
+		assertNumUsers(NUM_TEST_EXPENSES - 1);
 	}
 	
 	/* method for test purposes */

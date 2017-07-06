@@ -4,6 +4,7 @@ import java.util.List;
 
 import saveup.domain.Income;
 
+
 public interface IncomeService {
 
 	Income saveIncomeForUser(Income income, Long id);
@@ -14,4 +15,5 @@ public interface IncomeService {
 	
 	List<Income> findAllByUserId(Long id);
 	
+	void deleteById(Long id);
 }

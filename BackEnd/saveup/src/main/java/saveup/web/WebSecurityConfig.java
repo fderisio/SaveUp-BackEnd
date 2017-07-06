@@ -35,13 +35,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.mvcMatchers(      "/user/**").permitAll()
 					.and()
 
-			.mvcMatcher("/expenses/**")
+			.mvcMatcher("/categories/**")
 				.authorizeRequests()
 					.mvcMatchers(GET,  "/expenses/**").permitAll()
 					.mvcMatchers(POST, "/expenses").permitAll()
 					.mvcMatchers(      "/expenses/**").denyAll()
 					.and()
 
+			.mvcMatcher("/payments/**")
+				.authorizeRequests()
+					.mvcMatchers(GET,  "/expenses/**").permitAll()
+					.mvcMatchers(POST, "/expenses").permitAll()
+					.mvcMatchers(      "/expenses/**").denyAll()
+					.and()
+			
+			.mvcMatcher("/expenses/**")
+				.authorizeRequests()
+					.mvcMatchers(GET,  "/expenses/**").permitAll()
+					.mvcMatchers(POST, "/expenses").permitAll()
+					.mvcMatchers(      "/expenses/**").denyAll()
+					.and()
+					
 			.mvcMatcher("/**")
 				.authorizeRequests()
 					.mvcMatchers("/**").denyAll()

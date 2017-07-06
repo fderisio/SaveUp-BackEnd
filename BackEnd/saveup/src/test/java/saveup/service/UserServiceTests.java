@@ -11,7 +11,7 @@ import saveup.domain.User;
 
 public class UserServiceTests extends AbstractSaveUpIntegrationTests {
 
-	private static final int NUM_TEST_USERS = 2;
+	private static final int NUM_TEST_USERS = 3;
 
 	@Autowired
 	UserService userService;
@@ -28,8 +28,9 @@ public class UserServiceTests extends AbstractSaveUpIntegrationTests {
 	}
 
 	@Test
-	public void deleteById() {
-		User user = userService.findById(1L);
+	public void deleteById() { 
+		// works only if the user does not have categories, pay methods or incomes attached
+		User user = userService.findById(3L);
 		userService.deleteById(user.getId());
 		assertThat(userService.findAll()).hasSize(NUM_TEST_USERS - 1);
 	}

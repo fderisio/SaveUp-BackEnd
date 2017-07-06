@@ -5,12 +5,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import saveup.domain.PayMethod;
 import saveup.domain.User;
 import saveup.repository.PayMethodRepository;
 
+@Service
 public class DefaultPayMethodService implements PayMethodService{
 
 	private static final Logger logger = LoggerFactory.getLogger(DefaultUserService.class);
@@ -40,6 +42,12 @@ public class DefaultPayMethodService implements PayMethodService{
 		return payMethodRepository.save(paymethod);
 	}
 
+	@Transactional(readOnly = false)
+	@Override
+	public PayMethod update(PayMethod paymethod) {
+		logger.trace("Updating payment method [{}].", paymethod);
+		return payMethodRepository.save(paymethod);
+	}
 	@Override
 	public PayMethod findById(Long id) {
 		logger.trace("Finding payment method with ID: {}", id);
@@ -57,6 +65,13 @@ public class DefaultPayMethodService implements PayMethodService{
 	public List<PayMethod> findAllByUserId(Long id) {
 		logger.trace("Finding all payment methods by user ID: {}", id);
 		return this.payMethodRepository.findByUserId(id);
+	}
+	
+	@Transactional(readOnly = false)
+	@Override
+	public void deleteById(Long id) {
+		logger.trace("Deleting payment method with ID [{}].", id);
+		payMethodRepository.delete(id);
 	}
 
 }

@@ -56,6 +56,15 @@ public class IncomeRepositoryTest extends AbstractSaveUpIntegrationTests {
 		assertThat(incomes2).containsExactlyInAnyOrder(5000);
 	}
 	
+	@Test
+	public void deleteById() {
+		assertNumUsers(NUM_TEST_INCOMES);
+		Income income = incomeRepository.findById(1L).get();
+		incomeRepository.delete(income.getId());
+		incomeRepository.flush();
+		assertNumUsers(NUM_TEST_INCOMES - 1);
+	}
+
 	/* method for test purposes */
 	private void assertNumUsers(int expected) {
 		assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "income")).isEqualTo(expected);

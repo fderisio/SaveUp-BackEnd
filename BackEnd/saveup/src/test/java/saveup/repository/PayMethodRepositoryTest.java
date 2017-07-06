@@ -56,7 +56,7 @@ public class PayMethodRepositoryTest extends AbstractSaveUpIntegrationTests {
 		assertThat(ids).containsExactlyInAnyOrder(1L, 4L);
 	}
 	
-	@Test // FAIL!!! NOT WORKING!!!!
+	@Test // Works only for an unused payment method
 	public void deleteById() {
 		assertNumUsers(NUM_TEST_PAYMENT_METHODS);
 		PayMethod paymethod = payMethodsRepository.findById(1L).get();

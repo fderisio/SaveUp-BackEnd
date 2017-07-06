@@ -1,5 +1,6 @@
 package saveup.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +15,33 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import lombok.Data;
 import lombok.ToString;
 
 @Entity
 @Data
-@ToString
+@ToString(exclude = { "password" })
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+	
+	@JsonView(JsonViews.Public.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(name = "first_name", nullable = false, length = 50)
 	private String firstName;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(name = "last_name", nullable = false, length = 50)
 	private String lastName;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = false, unique = true, length = 75)
 	private String email;
 	
@@ -43,7 +52,7 @@ public class User {
 	private Date lastLogIn;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OrderBy("id")
+	@OrderBy("name")
 	private List<Category> categories = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -51,14 +60,8 @@ public class User {
 	private List<Income> incomes = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OrderBy("id")
+	@OrderBy("name")
 	private List<PayMethod> paymethods = new ArrayList<>();
-	
-//	// NEW
-//	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@OrderBy("exp_date")
-//	private List<Expense> expenses = new ArrayList<>();
-//	//
 	
 	public User() {
 		/* required by JPA */
@@ -99,13 +102,5 @@ public class User {
 		getIncomes().add(income);
 		income.setUser(this);
 	}
-	
-//	// NEW
-//	public void addExpense(Category category, Expense expense) {
-//		getExpenses().add(expense);
-//		category.setUser(this);
-//		expense.setUserExpenseCategory(category);
-//		
-//	}
 	
 }

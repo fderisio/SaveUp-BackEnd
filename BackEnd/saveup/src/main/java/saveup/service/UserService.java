@@ -15,5 +15,7 @@ public interface UserService {
 	User findById(Long id);
 
 	List<User> findAll();
+
+//	UserDetails loadUserByUsername(Long userId) throws UsernameNotFoundException;
 	
 }

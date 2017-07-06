@@ -11,9 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import saveup.AbstractSaveUpIntegrationTests;
+import saveup.domain.Category;
 import saveup.domain.EntityTestUtils;
 import saveup.domain.User;
-import saveup.domain.Category;
 
 public class CategoryRepositoryTest extends AbstractSaveUpIntegrationTests {
 
@@ -50,10 +50,19 @@ public class CategoryRepositoryTest extends AbstractSaveUpIntegrationTests {
 	
 	@Test
 	public void findByUserId() {
-		List<String> categories = categoryRepository.findByUserId(1L).stream().map(Category::getName).collect(toList());
+		List<String> categories = categoryRepository.findAllByUserId(1L).stream().map(Category::getName).collect(toList());
 		assertThat(categories).containsExactlyInAnyOrder("Leisure", "Chemist");
-		List<Long> ids = categoryRepository.findByUserId(1L).stream().map(Category::getId).collect(toList());
+		List<Long> ids = categoryRepository.findAllByUserId(1L).stream().map(Category::getId).collect(toList());
 		assertThat(ids).containsExactlyInAnyOrder(1L, 2L);
+	}
+	
+	@Test
+	public void deleteById() { // Works only for an unused category
+		assertNumUsers(NUM_TEST_CATEGORIES);
+		Category category = categoryRepository.findById(2L).get();
+		categoryRepository.delete(category.getId());
+		categoryRepository.flush();
+		assertNumUsers(NUM_TEST_CATEGORIES - 1);
 	}
 	
 	/* method for test purposes */

@@ -1,5 +1,7 @@
 package saveup.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,55 +20,62 @@ import lombok.ToString;
 @Data
 @ToString
 @Table(name = "expense")
-public class Expense {
+public class Expense implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	@JsonView(JsonViews.Public.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "category_id")
-	private Category userExpenseCategory;
+	private Category category;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = false, length = 20)
 	private String text;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = true, length = 30)
 	private String store;
 	
-	@Column(name = "exp_date", nullable = false)
-	private String expDate;
+	@JsonView(JsonViews.Public.class)
+	@Column(name = "expense_date", nullable = false)
+	private String expenseDate;
 	
+	@JsonView(JsonViews.Public.class)
 	@Column(nullable = false, length = 15)
 	private Double total;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "payment_method_id")
-	private PayMethod userPayMethod;
+	private PayMethod payMethod;
 	
 	public Expense() {
 		/* required by JPA */
 	}
 	
 	/* constructor without store */
-	public Expense(Category userExpenseCategory, String text,
-		String expDate,Double total, PayMethod userPayMethod) {
-		this.userExpenseCategory = userExpenseCategory;
+	public Expense(Category category, String text,
+		String expenseDate,Double total, PayMethod payMethod) {
+		this.category = category;
 		this.text = text;
-		this.expDate = expDate;
+		this.expenseDate = expenseDate;
 		this.total = total;
-		this.userPayMethod = userPayMethod;
+		this.payMethod = payMethod;
 	}
 	
 	/* full constructor */
-	public Expense(Category userExpenseCategory, String text,
-			String store, String expDate,Double total, PayMethod userPayMethod) {
-		this.userExpenseCategory = userExpenseCategory;
+	public Expense(Category category, String text,
+			String store, String expenseDate,Double total, PayMethod payMethod) {
+		this.category = category;
 		this.text = text;
 		this.store = store;
-		this.expDate = expDate;
+		this.expenseDate = expenseDate;
 		this.total = total;
-		this.userPayMethod = userPayMethod;
+		this.payMethod = payMethod;
 	}
 		
 }

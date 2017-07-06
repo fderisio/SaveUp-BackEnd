@@ -16,7 +16,7 @@ import saveup.domain.User;
 
 public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 
-	private static final int NUM_TEST_USERS = 2;
+	private static final int NUM_TEST_USERS = 3;
 	
 	@Autowired
 	UserRepository repository;
@@ -44,13 +44,14 @@ public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findAll() {
 		List<String> firstNames = repository.findAll().stream().map(User::getFirstName).collect(toList());
-		assertThat(firstNames).containsExactlyInAnyOrder("Eva", "Jack");
+		assertThat(firstNames).containsExactlyInAnyOrder("Eva", "Jack", "Susan");
 	}
 
 	@Test
-	public void deleteById() {
+	public void deleteById() { 
+		// fails when the user has categories, pay methods and/or incomes attached
 		assertNumUsers(NUM_TEST_USERS);
-		User user = repository.findById(1L).get();
+		User user = repository.findById(3L).get();
 		repository.delete(user.getId());
 		repository.flush();
 		assertNumUsers(NUM_TEST_USERS - 1);

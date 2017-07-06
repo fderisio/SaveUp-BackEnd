@@ -6,14 +6,14 @@ import saveup.domain.Expense;
 
 public interface ExpenseService {
 
-	Expense registerNewExpense(Expense expense);
+	Expense registerNewExpense(Expense expense, Long categoryId, Long paymethodId);
 
 	Expense findById(Long id);
 
 	List<Expense> findAll();
 
-	List<Expense> findAllByCategoryId(Long id);
-
-	List<Expense> findByTextContaining(String searchText);
+	Expense update(Expense expense);
+	
+	void deleteById(Long id);
 	
 }

@@ -13,5 +13,8 @@ public interface PayMethodService {
 	List<PayMethod> findAll();
 
 	List<PayMethod> findAllByUserId(Long id);
+
+	PayMethod update(PayMethod paymethod);
 	
+	void deleteById(Long id);
 }

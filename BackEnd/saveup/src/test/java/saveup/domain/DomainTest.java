@@ -39,7 +39,7 @@ public class DomainTest {
 		Category expCategory = new Category ("Leisure", user, false);
 		PayMethod payMethod = new PayMethod (user, "Visa", "HSBC");
 		Expense expense = new Expense (expCategory, "Cinema", "12.06.2017", 20.50, payMethod);
-		assertThat(expense.getUserExpenseCategory().getUser().getId()).isEqualTo(1L);
+		assertThat(expense.getCategory().getUser().getId()).isEqualTo(1L);
 	}
 
 }
