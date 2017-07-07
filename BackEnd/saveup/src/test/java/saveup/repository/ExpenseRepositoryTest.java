@@ -67,7 +67,6 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findById() {
 		assertThat(expenseRepository.findById(1L).get().getCategory().getName()).isEqualTo("Leisure");
-		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
 	@Test
@@ -75,12 +74,6 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 		List<String> expensesTotals = expenseRepository.findAllByCategoryId(1L).stream().map(Expense::getText).collect(toList());
 		assertThat(expensesTotals).containsExactlyInAnyOrder("Dinner", "Cinema");
 	}
-
-//	@Test
-//	public void findAllByUserId() {
-//		List<String> userExpensesText = expenseService.findAllByUserId(2L).stream().map(Expense::getText).collect(toList());
-//		assertThat(userExpensesText).containsExactlyInAnyOrder("Business Suit", "Sweater");
-//	}
 	
 	@Test
 	public void deleteById() {

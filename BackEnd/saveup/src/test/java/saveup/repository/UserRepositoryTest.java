@@ -38,7 +38,6 @@ public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findById() {
 		assertThat(repository.findById(1L).get().getFirstName()).isEqualTo("Eva");
-		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
 	@Test

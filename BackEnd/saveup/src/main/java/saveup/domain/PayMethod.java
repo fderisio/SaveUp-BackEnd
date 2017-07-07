@@ -59,11 +59,13 @@ public class PayMethod implements Serializable{
 		/* required by JPA */
 	}
 	
+	/* payment method without a bank */
 	public PayMethod(User user, String name) {
 		this.user = user;
 		this.name = name;
 	}
 	
+	/* full constructor */
 	public PayMethod(User user, String name, String bank) {
 		this.user = user;
 		this.name = name;

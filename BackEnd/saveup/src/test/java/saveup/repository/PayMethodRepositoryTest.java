@@ -45,7 +45,6 @@ public class PayMethodRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findById() {
 		assertThat(payMethodsRepository.findById(1L).get().getName()).isEqualTo("MasterCard");
-		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
 	@Test
@@ -56,7 +55,7 @@ public class PayMethodRepositoryTest extends AbstractSaveUpIntegrationTests {
 		assertThat(ids).containsExactlyInAnyOrder(1L, 4L);
 	}
 	
-	@Test // Works only for an unused payment method
+	@Test
 	public void deleteById() {
 		assertNumUsers(NUM_TEST_PAYMENT_METHODS);
 		PayMethod paymethod = payMethodsRepository.findById(1L).get();

@@ -45,7 +45,6 @@ public class CategoryRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findById() {
 		assertThat(categoryRepository.findById(1L).get().getName()).isEqualTo("Leisure");
-		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
 	@Test
@@ -57,7 +56,7 @@ public class CategoryRepositoryTest extends AbstractSaveUpIntegrationTests {
 	}
 	
 	@Test
-	public void deleteById() { // Works only for an unused category
+	public void deleteById() {
 		assertNumUsers(NUM_TEST_CATEGORIES);
 		Category category = categoryRepository.findById(3L).get();
 		categoryRepository.delete(category.getId());

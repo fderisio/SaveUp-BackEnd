@@ -84,19 +84,14 @@ public class DefaultExpenseService implements ExpenseService{
 		return this.expenseRepository.findAll();
 	}
 
-	// NEW
 	@Override
 	public Stack<List<Expense>> retrieveAllExpensesForUser(Long userId) {
 		List<Category> userCategories = categoryService.findAllByUserId(userId);
-//		List<Integer> categoriesId = new ArrayList<Integer>();
 		Stack<List<Expense>> userExpenses = new Stack<List<Expense>>();
-		//Stack categoriesId = new Stack();
 		for (Integer i = 0; i<userCategories.size()-1; i++) {
-			//categoriesId.push(userCategories.get(i));
 			List<Expense> expenses = expenseRepository.findAllByCategoryId(userCategories.get(i).getId());
 			userExpenses.push(expenses);
 		}
-		
 		return userExpenses;
 	}
 

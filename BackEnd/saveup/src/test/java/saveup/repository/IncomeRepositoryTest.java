@@ -45,7 +45,6 @@ public class IncomeRepositoryTest extends AbstractSaveUpIntegrationTests {
 	@Test
 	public void findById() {
 		assertThat(incomeRepository.findById(1L).get().getUser().getFirstName()).isEqualTo("Eva");
-		//assertThat(repository.findById(999999L)).isNotPresent();
 	}
 	
 	@Test
