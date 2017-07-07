@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import lombok.Data;
@@ -29,6 +30,8 @@ public class Expense implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@JsonView(JsonViews.Public.class)
+	@JsonIgnoreProperties({ "name", "fixed" })
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "category_id")
 	private Category category;
@@ -50,6 +53,7 @@ public class Expense implements Serializable{
 	private Double total;
 	
 	@JsonView(JsonViews.Public.class)
+	@JsonIgnoreProperties({ "name", "bank" })
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "payment_method_id")
 	private PayMethod payMethod;

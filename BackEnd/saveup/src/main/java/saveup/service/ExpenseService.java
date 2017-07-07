@@ -1,6 +1,7 @@
 package saveup.service;
 
 import java.util.List;
+import java.util.Stack;
 
 import saveup.domain.Expense;
 
@@ -10,12 +11,14 @@ public interface ExpenseService {
 
 	Expense findById(Long id);
 
-	List<Expense> findAll();
-
 	Expense update(Expense expense);
 	
 	void deleteById(Long id);
 
 	List<Expense> findAllByCategoryId(Long categoryId);
+	
+	List<Expense> findAll();
+
+	Stack<List<Expense>> retrieveAllExpensesForUser(Long userId);
 	
 }

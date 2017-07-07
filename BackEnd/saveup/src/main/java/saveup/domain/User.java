@@ -65,6 +65,7 @@ public class User implements Serializable {
 	@OrderBy("id")
 	private List<Income> incomes = new ArrayList<>();
 	
+	@JsonView(JsonViews.Public.class)
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OrderBy("name")

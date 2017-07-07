@@ -75,6 +75,12 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 		List<String> expensesTotals = expenseRepository.findAllByCategoryId(1L).stream().map(Expense::getText).collect(toList());
 		assertThat(expensesTotals).containsExactlyInAnyOrder("Dinner", "Cinema");
 	}
+
+//	@Test
+//	public void findAllByUserId() {
+//		List<String> userExpensesText = expenseService.findAllByUserId(2L).stream().map(Expense::getText).collect(toList());
+//		assertThat(userExpensesText).containsExactlyInAnyOrder("Business Suit", "Sweater");
+//	}
 	
 	@Test
 	public void deleteById() {
@@ -89,5 +95,4 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 	private void assertNumUsers(int expected) {
 		assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "expense")).isEqualTo(expected);
 	}
-	
 }

@@ -49,7 +49,6 @@ public class Category implements Serializable{
 	@Column(nullable = false)
 	private boolean fixed = false;
 	
-	@JsonView(JsonViews.Public.class)
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("expense_date")
 	@OnDelete(action = OnDeleteAction.CASCADE) // deletes category even with expenses attached

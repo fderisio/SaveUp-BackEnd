@@ -25,11 +25,11 @@ public class RestExpenseController {
 		this.expenseService = expenseService;
 	}
 	
-	@JsonView(JsonViews.Public.class)
-	@GetMapping
-	public List<Expense> retrieveAllCategories() {
-		return expenseService.findAll();
-	}
+//	@JsonView(JsonViews.Public.class)
+//	@GetMapping
+//	public List<Expense> retrieveAllCategories() {
+//		return expenseService.findAll();
+//	}
 	
 	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{categoryId}")

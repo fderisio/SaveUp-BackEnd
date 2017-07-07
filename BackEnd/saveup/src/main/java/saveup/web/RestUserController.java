@@ -4,6 +4,7 @@ import static org.springframework.web.servlet.mvc.method.annotation.MvcUriCompon
 import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
 
 import java.util.List;
+import java.util.Stack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -19,10 +20,12 @@ import org.springframework.web.util.UriComponents;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import saveup.service.CategoryService;
+import saveup.service.ExpenseService;
 import saveup.service.IncomeService;
 import saveup.service.PayMethodService;
 import saveup.service.UserService;
 import saveup.domain.Category;
+import saveup.domain.Expense;
 import saveup.domain.Income;
 import saveup.domain.JsonViews;
 import saveup.domain.PayMethod;
@@ -36,14 +39,17 @@ public class RestUserController {
 	private final CategoryService categoryService;
 	private final PayMethodService paymethodService;
 	private final IncomeService incomeService;
+	private final ExpenseService expenseService;
 	
 	@Autowired
 	public RestUserController(UserService userService, CategoryService categoryService,
-			PayMethodService paymethodService, IncomeService incomeService) {
+			PayMethodService paymethodService, IncomeService incomeService,
+			ExpenseService expenseService) {
 		this.userService = userService;
 		this.categoryService = categoryService;
 		this.paymethodService = paymethodService;
 		this.incomeService = incomeService;
+		this.expenseService = expenseService;
 		
 	}
 	
@@ -71,8 +77,14 @@ public class RestUserController {
 		return incomeService.findAllByUserId(userId);
 	}
 	
+	@JsonView(JsonViews.Public.class)
+	@GetMapping("/{userId}/expenses")
+	public 	Stack<List<Expense>> retrieveAllExpenses(@PathVariable Long userId) {
+		return expenseService.retrieveAllExpensesForUser(userId);
+	}
+
 	@JsonView(JsonViews.NewUser.class)
-	@PostMapping("/sigup")
+	@PostMapping("/signup")
 	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
 		User savedUser = userService.registerNewUser(postedUser);
 

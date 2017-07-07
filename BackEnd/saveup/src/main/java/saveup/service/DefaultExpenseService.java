@@ -1,6 +1,7 @@
 package saveup.service;
 
 import java.util.List;
+import java.util.Stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,12 +66,6 @@ public class DefaultExpenseService implements ExpenseService{
 	}
 
 	@Override
-	public List<Expense> findAll() {
-		logger.trace("Finding all expenses");
-		return this.expenseRepository.findAll();
-	}
-
-	@Override
 	public List<Expense> findAllByCategoryId(Long categoryId) {
 		logger.trace("Finding all expenses with category ID: {}", categoryId);
 		return this.expenseRepository.findAllByCategoryId(categoryId);
@@ -81,6 +76,28 @@ public class DefaultExpenseService implements ExpenseService{
 	public void deleteById(Long id) {
 		logger.trace("Deleting expense with ID [{}].", id);
 		expenseRepository.delete(id);
+	}
+
+	@Override
+	public List<Expense> findAll() {
+		logger.trace("Finding all expenses");
+		return this.expenseRepository.findAll();
+	}
+
+	// NEW
+	@Override
+	public Stack<List<Expense>> retrieveAllExpensesForUser(Long userId) {
+		List<Category> userCategories = categoryService.findAllByUserId(userId);
+//		List<Integer> categoriesId = new ArrayList<Integer>();
+		Stack<List<Expense>> userExpenses = new Stack<List<Expense>>();
+		//Stack categoriesId = new Stack();
+		for (Integer i = 0; i<userCategories.size()-1; i++) {
+			//categoriesId.push(userCategories.get(i));
+			List<Expense> expenses = expenseRepository.findAllByCategoryId(userCategories.get(i).getId());
+			userExpenses.push(expenses);
+		}
+		
+		return userExpenses;
 	}
 
 	
