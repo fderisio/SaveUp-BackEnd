@@ -110,5 +110,5 @@ public class User implements Serializable {
 		getIncomes().add(income);
 		income.setUser(this);
 	}
-	
+
 }

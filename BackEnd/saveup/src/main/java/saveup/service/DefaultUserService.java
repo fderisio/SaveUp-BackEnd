@@ -74,6 +74,13 @@ public class DefaultUserService implements UserService {
 		logger.trace("Finding all users.");
 		return userRepository.findAll();
 	}
+
+	@Override
+	public User findByEmailAndPassword(String email, String password) {
+		logger.trace("Finding user by email [{}].", email);
+		return userRepository.findByEmailAndPassword(email, password).orElseThrow(
+				() -> new EntityNotFoundException("Could not find User with email [" + email + "]"));
+	}
 	
 //// -- Spring Security: UserDetailsService ----------------------------------
 //

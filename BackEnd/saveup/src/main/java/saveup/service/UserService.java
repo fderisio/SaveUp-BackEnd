@@ -16,6 +16,8 @@ public interface UserService {
 
 	List<User> findAll();
 
+	User findByEmailAndPassword(String email, String password);
+
 //	UserDetails loadUserByUsername(Long userId) throws UsernameNotFoundException;
 	
 }

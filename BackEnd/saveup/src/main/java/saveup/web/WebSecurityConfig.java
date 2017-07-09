@@ -28,10 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
+		
 			.mvcMatcher("/user/**")
 				.authorizeRequests()
 					.mvcMatchers(GET,  "/user/**").permitAll()
 					.mvcMatchers(POST, "/user").permitAll()
+					.mvcMatchers(POST, "/user/**").permitAll()
 					.mvcMatchers(      "/user/**").permitAll()
 					.and()
 
@@ -62,7 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.mvcMatchers(POST, "/expenses").permitAll()
 					.mvcMatchers(      "/expenses/**").denyAll()
 					.and()
-					
+			
+			// deny permit if invalid URL typed
 			.mvcMatcher("/**")
 				.authorizeRequests()
 					.mvcMatchers("/**").denyAll()

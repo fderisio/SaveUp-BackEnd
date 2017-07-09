@@ -83,6 +83,18 @@ public class RestUserController {
 		return expenseService.retrieveAllExpensesForUser(userId);
 	}
 
+	@JsonView(JsonViews.Public.class)
+	@PostMapping("/login")
+	public HttpEntity<Void> postUserByEmailAndPassword(@RequestBody String email, String password) {
+		User user = userService.findByEmailAndPassword(email, password);
+		
+		UriComponents uriComponents = fromMethodCall(
+				on(getClass()).retrieveUserById(user.getId())).build();
+		
+		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+		
+	}
+	
 	@JsonView(JsonViews.NewUser.class)
 	@PostMapping("/signup")
 	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {

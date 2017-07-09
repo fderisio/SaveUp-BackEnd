@@ -41,6 +41,11 @@ public class UserRepositoryTest extends AbstractSaveUpIntegrationTests {
 	}
 	
 	@Test
+	public void findByEmailAndPassword() {
+		assertThat(repository.findByEmailAndPassword("eva@aol.com", "hello123").get().getFirstName()).isEqualTo("Eva");
+	}
+	
+	@Test
 	public void findAll() {
 		List<String> firstNames = repository.findAll().stream().map(User::getFirstName).collect(toList());
 		assertThat(firstNames).containsExactlyInAnyOrder("Eva", "Jack", "Susan");

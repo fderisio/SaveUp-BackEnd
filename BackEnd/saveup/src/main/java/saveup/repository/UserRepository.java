@@ -11,5 +11,7 @@ import saveup.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findById(Long id);
+
+	Optional<User> findByEmailAndPassword(String email, String password);
 	
 }
