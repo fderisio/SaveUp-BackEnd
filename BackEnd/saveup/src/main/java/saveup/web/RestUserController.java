@@ -52,6 +52,7 @@ public class RestUserController {
 		
 	}
 	
+	// works 09/07/2016
 	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{userId}")
 	public User retrieveUserById(@PathVariable Long userId) {
@@ -76,25 +77,23 @@ public class RestUserController {
 		return incomeService.findAllByUserId(userId);
 	}
 	
+	// works 09/07/2017
 	@JsonView(JsonViews.Public.class)
 	@GetMapping("/{userId}/expenses")
 	public List<Expense> retrieveAllExpenses(@PathVariable Long userId) {
 		return expenseService.retrieveAllExpensesForUser(userId);
 	}
 	
+	// works 09/07/2017
 	@JsonView(JsonViews.Public.class)
 	@PostMapping("/login")
-	public HttpEntity<Void> postUserByEmailAndPassword(@RequestBody User postedUser) {
+	public User postUserByEmailAndPassword(@RequestBody User postedUser) {
 		String email = postedUser.getEmail();
 		String password = postedUser.getPassword();
 		User user = userService.findByEmailAndPassword(email, password);
-		
-		UriComponents uriComponents = fromMethodCall(
-				on(getClass()).retrieveUserById(user.getId())).build();
-		
-		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+		return user;
 	}
-	
+
 	@JsonView(JsonViews.Public.class)
 	@PostMapping("/signup")
 	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
@@ -122,6 +121,7 @@ public class RestUserController {
 		expenseService.save(postedExpense, category, paymethod);
 	}
 	
+	// works 09/07/2016
 	@JsonView(JsonViews.Public.class)
 	@PostMapping("/1/categories/add") // in the future: @PostMapping("/{userId}/categories/add")
 	public void createCategory(@RequestBody Category postedCategory) {
