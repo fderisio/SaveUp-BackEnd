@@ -45,7 +45,7 @@ public class Expense implements Serializable{
 	private String store;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(name = "expense_date", nullable = false, length = 10)
+	@Column(name = "expense_date", nullable = false)
 	private String expenseDate;
 	
 	@JsonView(JsonViews.Public.class)

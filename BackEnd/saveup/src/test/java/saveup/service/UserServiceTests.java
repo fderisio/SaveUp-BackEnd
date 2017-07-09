@@ -12,13 +12,17 @@ import saveup.domain.User;
 public class UserServiceTests extends AbstractSaveUpIntegrationTests {
 
 	private static final int NUM_TEST_USERS = 3;
+	private static final int NUM_TEST_EXPENSES = 4;
 
 	@Autowired
 	UserService userService;
-
+	@Autowired
+	ExpenseService expenseService;
+	
 	@Test
 	public void findAll() {
 		assertThat(userService.findAll()).hasSize(NUM_TEST_USERS);
+		assertThat(expenseService.findAll()).hasSize(NUM_TEST_EXPENSES);
 	}
 
 	@Test

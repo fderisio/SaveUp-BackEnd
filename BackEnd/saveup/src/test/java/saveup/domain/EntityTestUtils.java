@@ -23,7 +23,7 @@ public class EntityTestUtils {
 	}
 	
 	public static Expense createExpense() {
-		Expense expense = new Expense (createNewCategory(), "Cinema", "12.06.2017", 20.50, createPayMethod());
+		Expense expense = new Expense (createNewCategory(), "Cinema", "2017-06-14T00:00:00.000Z", 20.50, createPayMethod());
 		return expense;
 	}
 	

@@ -24,10 +24,10 @@ insert into payment_method(id, user_id, name, bank) values (3L, 2L, 'MasterCard'
 insert into payment_method(id, user_id, name, bank) values (4L, 1L, 'American Express', 'Credit Suisse');
 
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(1L, 1L, 'Dinner', 'Restaurant Bindella', '12.06.2017', 120, 1L);
+(1L, 1L, 'Dinner', 'Restaurant Bindella', {ts '2017-01-01 00:00:00.00'}, 120, 1L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(2L, 1L, 'Cinema', '', '15.06.2017', 15, 1L);
+(2L, 1L, 'Cinema', '', {ts '2017-01-01 00:00:00.00'}, 15, 1L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(3L, 3L, 'Business Suit', 'H&M', '12.06.2017', 100, 3L);
+(3L, 3L, 'Business Suit', 'H&M', {ts '2017-01-01 00:00:00.00'}, 100, 3L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(4L, 3L, 'Sweater', 'C&A', '20.06.2017', 20, 4L);
+(4L, 3L, 'Sweater', 'C&A', {ts '2017-01-01 00:00:00.00'}, 20, 4L);

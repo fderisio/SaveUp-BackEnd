@@ -57,6 +57,7 @@ public class ExpenseRepositoryTest extends AbstractSaveUpIntegrationTests {
 		Expense expense = EntityTestUtils.createExpense();
 		category.addExpense(expense);
 		payMethod.addExpense(expense);
+		
 		expense.setCategory(category);
 		expense.setPayMethod(payMethod);
 		expenseRepository.save(expense);
