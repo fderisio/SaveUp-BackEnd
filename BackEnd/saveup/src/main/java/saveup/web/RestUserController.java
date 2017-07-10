@@ -132,5 +132,11 @@ public class RestUserController {
 	public void createIncome(@RequestBody Income postedIncome, @PathVariable Long userId) {
 		incomeService.saveIncomeForUser(postedIncome, userId);
 	}
+	
+	@JsonView(JsonViews.Public.class)
+	@PostMapping("/{userId}/paymethods/add") // in the future: @PostMapping("/{userId}/categories/add")
+	public void createPayMethod(@RequestBody PayMethod postedPayMethod, @PathVariable Long userId) {
+		paymethodService.savePayMethodForUser(postedPayMethod, userId);
+	}
 
 }
