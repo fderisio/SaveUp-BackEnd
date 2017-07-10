@@ -64,7 +64,7 @@ public class Expense implements Serializable{
 	
 	/* constructor without store */
 	public Expense(Category category, String text,
-			String expenseDate,Double total, PayMethod payMethod) {
+			String expenseDate, Double total, PayMethod payMethod) {
 		this.category = category;
 		this.text = text;
 		this.expenseDate = expenseDate;
@@ -74,7 +74,7 @@ public class Expense implements Serializable{
 	
 	/* full constructor */
 	public Expense(Category category, String text,
-			String store, String expenseDate,Double total, PayMethod payMethod) {
+			String store, String expenseDate, Double total, PayMethod payMethod) {
 		this.category = category;
 		this.text = text;
 		this.store = store;

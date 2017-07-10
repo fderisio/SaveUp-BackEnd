@@ -1,20 +1,14 @@
 package saveup.web;
 
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.fromMethodCall;
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponents;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -96,14 +90,20 @@ public class RestUserController {
 
 	@JsonView(JsonViews.Public.class)
 	@PostMapping("/signup")
-	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
-		User savedUser = userService.registerNewUser(postedUser);
-
-		UriComponents uriComponents = fromMethodCall(
-			on(getClass()).retrieveCategoriesByUserId(savedUser.getId())).build();
-
-		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+	public void registerNewUser(@RequestBody User postedUser) {
+		userService.registerNewUser(postedUser);
 	}
+	
+//	@JsonView(JsonViews.Public.class)
+//	@PostMapping("/signup")
+//	public HttpEntity<Void> registerNewUser(@RequestBody User postedUser) {
+//		User savedUser = userService.registerNewUser(postedUser);
+//		
+//		UriComponents uriComponents = fromMethodCall(
+//			on(getClass()).retrieveUserById(savedUser.getId())).build();
+//
+//		return ResponseEntity.created(uriComponents.encode().toUri()).build();
+//	}
 	
 //	@JsonView(JsonViews.Public.class)
 //	@PostMapping("/1/expenses/add")
@@ -114,18 +114,23 @@ public class RestUserController {
 //	}
 	
 	@JsonView(JsonViews.Public.class)
-	@PostMapping("/1/expenses/add")
-	public void createExpense(@RequestBody Expense postedExpense) {
-		Category category = postedExpense.getCategory();
-		PayMethod paymethod = postedExpense.getPayMethod();
-		expenseService.save(postedExpense, category, paymethod);
+	@PostMapping("/{categoryId}{paymentId}/expenses/add")
+	public void createExpense(@RequestBody Expense postedExpense, 
+			@PathVariable Long categoryId, Long paymentId) {
+		expenseService.registerNewExpense(postedExpense, categoryId, paymentId);
 	}
 	
 	// works 09/07/2016
 	@JsonView(JsonViews.Public.class)
-	@PostMapping("/1/categories/add") // in the future: @PostMapping("/{userId}/categories/add")
-	public void createCategory(@RequestBody Category postedCategory) {
-		categoryService.saveCategoryForUser(postedCategory, 1L);
+	@PostMapping("/{userId}/categories/add")
+	public void createCategory(@RequestBody Category postedCategory, @PathVariable Long userId) {
+		categoryService.saveCategoryForUser(postedCategory, userId);
+	}
+	
+	@JsonView(JsonViews.Public.class)
+	@PostMapping("/{userId}/incomes/add") // in the future: @PostMapping("/{userId}/categories/add")
+	public void createIncome(@RequestBody Income postedIncome, @PathVariable Long userId) {
+		incomeService.saveIncomeForUser(postedIncome, userId);
 	}
 
 }

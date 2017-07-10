@@ -2,13 +2,11 @@ package saveup.service;
 
 import java.util.List;
 
-import saveup.domain.Category;
 import saveup.domain.Expense;
-import saveup.domain.PayMethod;
 
 public interface ExpenseService {
 
-	Expense save(Expense expense, Category category, PayMethod paymethod);
+	Expense registerNewExpense(Expense expense, Long categoryId, Long paymentId);
 
 	Expense findById(Long id);
 

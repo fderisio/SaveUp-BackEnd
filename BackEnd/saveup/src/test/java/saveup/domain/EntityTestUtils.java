@@ -3,7 +3,7 @@ package saveup.domain;
 public class EntityTestUtils {
 
 	public static User createHomero() {
-		User homero = new User(4L, "Homero", "Tompson", "jack15@aol.com", "hello1234");
+		User homero = new User("Homero", "Tompson", "jack15@aol.com", "hello1234");
 		return homero;
 	}
 	

@@ -17,32 +17,38 @@ import saveup.repository.ExpenseRepository;
 @Service
 public class DefaultExpenseService implements ExpenseService{
 	
-	private static final Logger logger = LoggerFactory.getLogger(DefaultCategoryService.class);
+	private static final Logger logger = LoggerFactory.getLogger(DefaultExpenseService.class);
 
 	private final ExpenseRepository expenseRepository;
 	private final CategoryService categoryService;
+	private final PayMethodService paymethodService;
 	
 	@Autowired
 	public DefaultExpenseService(ExpenseRepository expenseRepository,
-			CategoryService categoryService) {
+			CategoryService categoryService, PayMethodService paymethodService) {
 		this.expenseRepository = expenseRepository;
 		this.categoryService = categoryService;
+		this.paymethodService = paymethodService;
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
-	public Expense save(Expense expense, Category category, PayMethod paymethod) {
+	public Expense registerNewExpense(Expense expense, Long categoryId, Long paymentId) {
 		logger.trace("Saving expense [{}].", expense);
 
 		// add expense to category list
+		Category category = categoryService.findById(categoryId);
 		category.addExpense(expense);
 		
 		// add expense to payment method list
+		PayMethod paymethod = paymethodService.findById(paymentId);
 		paymethod.addExpense(expense);
 		
 		// make sure we are saving a new expense and not accidentally
 		// updating an existing one.
 		expense.setId(null);
+		expense.setCategory(category);
+		expense.setPayMethod(paymethod);
 		
 		return expenseRepository.save(expense);
 	}
@@ -84,7 +90,7 @@ public class DefaultExpenseService implements ExpenseService{
 	public List<Expense> retrieveAllExpensesForUser(Long userId) {
 		List<Category> userCategories = categoryService.findAllByUserId(userId);
 		List<Expense> userExpenses = new ArrayList<Expense>();
-		for (Integer i = 0; i<userCategories.size()-1; i++) {
+		for (Integer i = 0; i<userCategories.size(); i++) {
 			List<Expense> expenses = expenseRepository.findAllByCategoryId(userCategories.get(i).getId());
 			userExpenses.addAll(expenses);
 		}

@@ -75,11 +75,11 @@ public class User implements Serializable {
 		/* required by JPA */
 	}
 	
-	public User(String firstName, String lastName, String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
+//	public User(String firstName, String lastName, String email) {
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.email = email;
+//	}
 	
 	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
@@ -88,13 +88,13 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
-	public User(Long id, String firstName, String lastName, String email, String password) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-	}
+//	public User(Long id, String firstName, String lastName, String email, String password) {
+//		this.id = id;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.email = email;
+//		this.password = password;
+//	}
 	
 	public void addCategory(Category category) {
 		getCategories().add(category);
