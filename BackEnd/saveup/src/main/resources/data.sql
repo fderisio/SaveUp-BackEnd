@@ -20,9 +20,12 @@ insert into category(id, name, user_id, fixed) values (8L, 'Groceries', 2L, fals
 insert into category(id, name, user_id, fixed) values (9L, 'Holidays', 2L, false);
 insert into category(id, name, user_id, fixed) values (10L, 'Clothing', 2L, false);
 
-insert into income(id, user_id, amount, started_at, monthly) values (1L, 1L, 8000, '01.01.2017', true);
-insert into income(id, user_id, amount, started_at, monthly) values (2L, 2L, 5000, '01.01.2017', true);
-insert into income(id, user_id, amount, started_at, monthly) values (3L, 1L, 9000, '01.06.2017', true);
+insert into category(id, name, user_id, fixed) values (11L, 'Rent', 1L, true);
+insert into category(id, name, user_id, fixed) values (12L, 'Cell phone', 1L, true);
+insert into category(id, name, user_id, fixed) values (13L, 'Internet', 1L, true);
+
+insert into income(id, user_id, amount, started_at, monthly) values (1L, 1L, 5500, '01.01.2017', true);
+insert into income(id, user_id, amount, started_at, monthly) values (2L, 2L, 4700, '01.06.2017', true);
 
 insert into payment_method(id, user_id, name, bank) values (1L, 1L, 'MasterCard', 'CitiBank');
 insert into payment_method(id, user_id, name, bank) values (2L, 1L, 'American Express', 'Credit Suisse');
@@ -45,7 +48,7 @@ insert into expense(id, category_id, text, store, expense_date, total, payment_m
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
 (6L, 3L, 'Weekly groceries', 'Migros', '2017-07-10T00:00:00.000Z', 46.50, 1L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
-(7L, 3L, 'Weekly groceries', 'COOP', '2017-07-06T00:00:00.000Z', 6.75, 5L);
+(7L, 3L, 'Weekly groceries', 'COOP', '2017-07-06T00:00:00.000Z', 6.75, 3L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
 (8L, 3L, 'Weekly groceries', 'Denner', '2017-07-05T00:00:00.000Z', 31.50, 1L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
@@ -78,3 +81,35 @@ insert into expense(id, category_id, text, store, expense_date, total, payment_m
 (22L, 3L, 'Weekly groceries', 'Migros', '2017-06-24T00:00:00.000Z', 45.50, 1L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
 (23L, 3L, 'Weekly groceries', 'Denner', '2017-06-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(24L, 11L, '', '', '2017-06-15T00:00:00.000Z', 1900, 1L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(25L, 12L, '', 'Swisscom', '2017-06-15T00:00:00.000Z', 69, 1L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(26L, 13L, '', 'Cablecom', '2017-06-15T00:00:00.000Z', 90, 1L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(27L, 3L, 'Weekly groceries', 'Denner', '2017-05-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(28L, 3L, 'Weekly groceries', 'Denner', '2017-05-15T00:00:00.000Z', 85.50, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(29L, 3L, 'Weekly groceries', 'Denner', '2017-05-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(30L, 3L, 'Weekly groceries', 'Denner', '2017-04-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(31L, 3L, 'Weekly groceries', 'Denner', '2017-04-15T00:00:00.000Z', 85.50, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(32L, 3L, 'Weekly groceries', 'Denner', '2017-04-15T00:00:00.000Z', 85.50, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(33L, 3L, 'Weekly groceries', 'Denner', '2017-03-15T00:00:00.000Z', 85.50, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(34L, 3L, 'Weekly groceries', 'Denner', '2017-02-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(35L, 3L, 'Weekly groceries', 'Denner', '2017-02-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(36L, 3L, 'Weekly groceries', 'Denner', '2017-01-15T00:00:00.000Z', 85.50, 3L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(37L, 4L, 'New York', '', '2017-01-02T00:00:00.000Z', 1500, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(38L, 4L, 'Buenos Aires Stay', '', '2017-03-02T00:00:00.000Z', 900, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(39L, 4L, 'Buenos Aires Flight', '', '2017-01-30T00:00:00.000Z', 1500, 2L);
