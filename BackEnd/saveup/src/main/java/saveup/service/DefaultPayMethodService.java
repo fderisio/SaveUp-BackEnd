@@ -12,6 +12,7 @@ import saveup.domain.PayMethod;
 import saveup.domain.User;
 import saveup.repository.PayMethodRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class DefaultPayMethodService implements PayMethodService{
 
@@ -28,18 +29,24 @@ public class DefaultPayMethodService implements PayMethodService{
 	
 	@Transactional(readOnly = false)
 	@Override
-	public PayMethod savePayMethodForUser(PayMethod paymethod, Long id) {
+	public void savePayMethodForUser(PayMethod paymethod, Long id) {
 		logger.trace("Saving payment method [{}] for user [{}].", paymethod, id);
 
-		// Link payment method to user.
+		// Search for user
 		User user = userService.findById(id);
-		user.addPayMethod(paymethod);
 
 		// Make sure we are saving a new payment method and not accidentally
 		// updating an existing one.
 		paymethod.setId(null);
 
-		return payMethodRepository.save(paymethod);
+		// link user to payment method
+		paymethod.setUser(user);
+		
+		// create payment method
+		payMethodRepository.save(paymethod);
+		
+		// Link payment method to user
+		user.addPayMethod(paymethod);	
 	}
 
 	@Transactional(readOnly = false)

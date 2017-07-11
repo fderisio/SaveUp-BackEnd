@@ -38,7 +38,7 @@ public class Income implements Serializable{
 	private Integer amount;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(name = "started_at", nullable = false, length = 10)
+	@Column(name = "started_at", nullable = false)
 	private String startedAt;
 	
 	@JsonView(JsonViews.Public.class)
@@ -46,7 +46,7 @@ public class Income implements Serializable{
 	private boolean monthly = true;
 	
 	@JsonView(JsonViews.Public.class)
-	@Column(name = "end_at", nullable = true, length = 10)
+	@Column(name = "end_at", nullable = true)
 	private String endAt;
 	
 	public Income() {

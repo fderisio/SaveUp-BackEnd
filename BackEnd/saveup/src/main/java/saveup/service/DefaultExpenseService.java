@@ -14,6 +14,7 @@ import saveup.domain.Expense;
 import saveup.domain.PayMethod;
 import saveup.repository.ExpenseRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class DefaultExpenseService implements ExpenseService{
 	

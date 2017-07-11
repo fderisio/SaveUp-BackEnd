@@ -28,18 +28,21 @@ public class DefaultIncomeService implements IncomeService {
 	
 	@Transactional(readOnly = false)
 	@Override
-	public Income saveIncomeForUser(Income income, Long id) {
+	public void saveIncomeForUser(Income income, Long id) {
 		logger.trace("Saving income [{}] for user [{}].", income, id);
-
-		// Link income to user.
+		
+		// link income to user
 		User user = userService.findById(id);
-		user.addIncome(income);
-
+		income.setUser(user);
+		
 		// Make sure we are saving a new income and not accidentally
-		// updating an existing one.
+		// updating an existing one
 		income.setId(null);
 
-		return incomeRepository.save(income);
+		incomeRepository.save(income);
+		
+		// Link user to income
+		user.addIncome(income);
 	}
 	
 	@Override

@@ -30,18 +30,21 @@ public class DefaultCategoryService implements CategoryService{
 	
 	@Transactional(readOnly = false)
 	@Override
-	public Category saveCategoryForUser(Category category, Long id) {
+	public void saveCategoryForUser(Category category, Long id) {
 		logger.trace("Saving category [{}] for user ID [{}].", category, id);
 
-		// Link category to user.
+		// Link user to category
 		User user = userService.findById(id);
-		user.addCategory(category);
-
+		category.setUser(user);
+		
 		// Make sure we are saving a new category and not accidentally
-		// updating an existing one.
+		// updating an existing one
 		category.setId(null);
 
-		return categoryRepository.save(category);
+		categoryRepository.save(category);
+		
+		// link category to user
+		user.addCategory(category);
 	}
 
 	@Override
@@ -51,7 +54,6 @@ public class DefaultCategoryService implements CategoryService{
 			() -> new EntityNotFoundException("Could not find category with ID [" + id + "]"));
 	}
 	
-
 	@Override
 	public List<Category> findAll() {
 		logger.trace("Finding all categories");

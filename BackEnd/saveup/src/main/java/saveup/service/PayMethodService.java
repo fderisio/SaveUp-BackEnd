@@ -6,7 +6,7 @@ import saveup.domain.PayMethod;
 
 public interface PayMethodService {
 
-	PayMethod savePayMethodForUser(PayMethod paymethod, Long id);
+	void savePayMethodForUser(PayMethod paymethod, Long id);
 
 	PayMethod findById(Long id);
 

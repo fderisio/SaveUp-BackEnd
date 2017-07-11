@@ -23,6 +23,10 @@ insert into category(id, name, user_id, fixed) values (10L, 'Clothing', 2L, fals
 insert into category(id, name, user_id, fixed) values (11L, 'Rent', 1L, true);
 insert into category(id, name, user_id, fixed) values (12L, 'Cell phone', 1L, true);
 insert into category(id, name, user_id, fixed) values (13L, 'Internet', 1L, true);
+insert into category(id, name, user_id, fixed) values (14L, 'Health Insurance', 1L, true);
+insert into category(id, name, user_id, fixed) values (15L, 'Home Insurance', 1L, true);
+insert into category(id, name, user_id, fixed) values (16L, 'Cable - TV', 1L, true);
+insert into category(id, name, user_id, fixed) values (17L, 'Transportation Abo', 1L, true);
 
 insert into income(id, user_id, amount, started_at, monthly) values (1L, 1L, 5500, '01.01.2017', true);
 insert into income(id, user_id, amount, started_at, monthly) values (2L, 2L, 4700, '01.06.2017', true);
@@ -113,3 +117,11 @@ insert into expense(id, category_id, text, store, expense_date, total, payment_m
 (38L, 4L, 'Buenos Aires Stay', '', '2017-03-02T00:00:00.000Z', 900, 2L);
 insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
 (39L, 4L, 'Buenos Aires Flight', '', '2017-01-30T00:00:00.000Z', 1500, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(40L, 14L, '', '', '2017-01-01T00:00:00.000Z', 300, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(41L, 15L, '', '', '2017-01-01T00:00:00.000Z', 40, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(42L, 16L, '', '', '2017-01-01T00:00:00.000Z', 40, 2L);
+insert into expense(id, category_id, text, store, expense_date, total, payment_method_id) values 
+(43L, 17L, '', '', '2017-01-01T00:00:00.000Z', 340, 1L);

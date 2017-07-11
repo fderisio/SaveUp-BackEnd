@@ -6,7 +6,7 @@ import saveup.domain.Category;
 
 public interface CategoryService {
 
-	Category saveCategoryForUser(Category category, Long id);
+	void saveCategoryForUser(Category category, Long id);
 
 	Category findById(Long id);
 

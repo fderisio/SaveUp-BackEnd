@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import saveup.domain.User;
 import saveup.repository.UserRepository;
 
+@Transactional(readOnly = true)
 @Service
 public class DefaultUserService implements UserService {
 
@@ -31,21 +32,22 @@ public class DefaultUserService implements UserService {
 	@Transactional(readOnly = false)
 	@Override
 	public User registerNewUser(User user) {
+		logger.trace("Registering new user [{}].", user);
 		// Make sure we are saving a new user and not accidentally
 		// updating an existing user.
 		user.setId(null);
+
+		// Encrypt password before storing in database.
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		// A new user cannot have categories, pay methods or incomes before the account exists.
 		user.getCategories().clear();
 		user.getPaymethods().clear();
 		user.getIncomes().clear();
-
-		// Encrypt password before storing in database.
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-		logger.trace("Registering new user [{}].", user);
-
-		return userRepository.save(user);
+		
+		User registeredUser = userRepository.save(user);
+		
+		return registeredUser;
 	}
 
 	@Transactional(readOnly = false)

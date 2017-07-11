@@ -4,10 +4,9 @@ import java.util.List;
 
 import saveup.domain.Income;
 
-
 public interface IncomeService {
 
-	Income saveIncomeForUser(Income income, Long id);
+	void saveIncomeForUser(Income income, Long id);
 	
 	Income findById(Long id);
 	

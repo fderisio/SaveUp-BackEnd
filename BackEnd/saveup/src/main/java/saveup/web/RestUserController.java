@@ -105,14 +105,6 @@ public class RestUserController {
 //		return ResponseEntity.created(uriComponents.encode().toUri()).build();
 //	}
 	
-//	@JsonView(JsonViews.Public.class)
-//	@PostMapping("/1/expenses/add")
-//	public void createExpense(@RequestBody Expense postedExpense) {
-//		Category category = categoryService.findById(postedExpense.getCategory().getId());
-//		PayMethod paymethod = paymethodService.findById(postedExpense.getPayMethod().getId());
-//		expenseService.registerNewExpense(postedExpense, category, paymethod);
-//	}
-	
 	@JsonView(JsonViews.Public.class)
 	@PostMapping("/{categoryId}/{paymentId}/expenses/add")
 	public void createExpense(@RequestBody Expense postedExpense, 
@@ -136,7 +128,7 @@ public class RestUserController {
 	}
 	
 	@JsonView(JsonViews.Public.class)
-	@PostMapping("/{userId}/paymethods/add") // in the future: @PostMapping("/{userId}/categories/add")
+	@PostMapping("/{userId}/paymethods/add")
 	public void createPayMethod(@RequestBody PayMethod postedPayMethod, @PathVariable Long userId) {
 		paymethodService.savePayMethodForUser(postedPayMethod, userId);
 	}
