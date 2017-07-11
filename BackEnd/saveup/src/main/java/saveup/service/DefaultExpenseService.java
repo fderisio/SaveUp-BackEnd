@@ -33,9 +33,15 @@ public class DefaultExpenseService implements ExpenseService{
 	
 	@Transactional(readOnly = false)
 	@Override
-	public Expense registerNewExpense(Expense expense, Long categoryId, Long paymentId) {
+	public void registerNewExpense(Expense expense, Long categoryId, Long paymentId) {
 		logger.trace("Saving expense [{}].", expense);
 
+		// make sure we are saving a new expense and not accidentally
+		// updating an existing one.
+		expense.setId(null);
+
+		expenseRepository.save(expense);
+		
 		// add expense to category list
 		Category category = categoryService.findById(categoryId);
 		category.addExpense(expense);
@@ -44,13 +50,8 @@ public class DefaultExpenseService implements ExpenseService{
 		PayMethod paymethod = paymethodService.findById(paymentId);
 		paymethod.addExpense(expense);
 		
-		// make sure we are saving a new expense and not accidentally
-		// updating an existing one.
-		expense.setId(null);
 		expense.setCategory(category);
 		expense.setPayMethod(paymethod);
-		
-		return expenseRepository.save(expense);
 	}
 
 	@Transactional(readOnly = false)

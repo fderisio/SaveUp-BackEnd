@@ -114,10 +114,12 @@ public class RestUserController {
 //	}
 	
 	@JsonView(JsonViews.Public.class)
-	@PostMapping("/{categoryId}{paymentId}/expenses/add")
+	@PostMapping("/{categoryId}/{paymentId}/expenses/add")
 	public void createExpense(@RequestBody Expense postedExpense, 
-			@PathVariable Long categoryId, Long paymentId) {
-		expenseService.registerNewExpense(postedExpense, categoryId, paymentId);
+			@PathVariable Long categoryId, Long paymentId) 
+	{
+		Long value3 = postedExpense.getPayMethod().getId();
+		expenseService.registerNewExpense(postedExpense, categoryId, value3);
 	}
 	
 	// works 09/07/2016

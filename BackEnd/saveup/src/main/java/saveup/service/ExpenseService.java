@@ -6,7 +6,7 @@ import saveup.domain.Expense;
 
 public interface ExpenseService {
 
-	Expense registerNewExpense(Expense expense, Long categoryId, Long paymentId);
+	void registerNewExpense(Expense expense, Long categoryId, Long paymentId);
 
 	Expense findById(Long id);
 
