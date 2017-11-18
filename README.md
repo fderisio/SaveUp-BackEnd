@@ -15,7 +15,7 @@ A web project where you can add your daily expenses to get charts with a savings
   - Log out
 
 **Install:**
-1) clone SaveUp Frontend and SaveUp Backend repositories.
+1) clone [SaveUp-FrontEnd](https://github.com/fderisio/SaveUp-FrontEnd) and [SaveUp-BackEnd](https://github.com/fderisio/SaveUp-BackEnd) repositories.
 2) run the Backend DB with the server: http://localhost:8080/
 3) run the Frontend project with the server: http://localhost:3000/
 4) sign in using:
